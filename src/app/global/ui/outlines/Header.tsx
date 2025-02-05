@@ -5,11 +5,94 @@ import Image from 'next/image'
 import { styled } from 'styled-components'
 import { SlLogin } from 'react-icons/sl'
 import { FaUserPlus, FaHome, FaSearch } from 'react-icons/fa'
+import colors from '../../assets/styles/color'
+import sizes from '../../assets/styles/size'
 import logo from '../../assets/images/logo.png'
 
-const StyledHeader = styled.header``
-const StyledForm = styled.form``
-const StyledMenu = styled.nav``
+const { primary, light, dark, white } = colors
+const { medium, big } = sizes
+
+const StyledHeader = styled.header`
+  .site-top {
+    background: ${light};
+    height: 45px;
+
+    .layout-width {
+      display: flex;
+      justify-content: space-between;
+
+      & > div {
+        display: flex;
+        align-items: center;
+        height: 45px;
+
+        a + a {
+          margin-left: 10px;
+        }
+
+        a {
+          line-height: 1;
+        }
+      }
+
+      svg {
+        font-size: ${big};
+      }
+    }
+  }
+  .logo-search {
+    .layout-width {
+      display: flex;
+      justify-content: space-between;
+      height: 150px;
+      align-items: center;
+    }
+  }
+`
+const StyledForm = styled.form`
+  width: 350px;
+  display: flex;
+  border: 5px solid ${dark};
+
+  button {
+    width: 45px;
+    background: ${dark};
+    color: ${white};
+    border: 0;
+    cursor: pointer;
+
+    svg {
+      font-size: ${big};
+    }
+  }
+
+  input {
+    flex-grow: 1;
+    border: 0;
+    padding: 10px;
+    font-size: ${medium};
+  }
+`
+const StyledMenu = styled.nav`
+  background: ${primary};
+
+  .layout-width {
+    display: flex;
+    height: 50px;
+    line-height: 50px;
+
+    a {
+      color: ${light};
+      font-size: ${medium};
+      padding: 0 40px;
+
+      &:hover,
+      &.on {
+        background: ${dark};
+      }
+    }
+  }
+`
 
 const Header = () => {
   return (
@@ -34,22 +117,16 @@ const Header = () => {
       {/* site-top */}
       <div className="logo-search">
         <div className="layout-width">
-          <div className="left">
-            <Link href="/">
-              <Image src={logo} alt="로고" />
-            </Link>
-          </div>
+          <Link href="/" className="logo">
+            <Image src={logo} alt="로고" />
+          </Link>
 
-          <div className="right">
-            <StyledForm method='"GET' action="/board/search" autoComplete="off">
-              <input
-                type="text"
-                name="skey"
-                placeholder="검색어를 입력하세요"
-              />
-              <button type='submit'>검색하기</button>
-            </StyledForm>
-          </div>
+          <StyledForm method='"GET' action="/board/search" autoComplete="off">
+            <input type="text" name="skey" placeholder="검색어를 입력하세요" />
+            <button type="submit">
+              <FaSearch />
+            </button>
+          </StyledForm>
         </div>
       </div>
       {/* logo-search */}
