@@ -12,10 +12,11 @@ import { SmallButtton, BigButtton } from '@/app/global/components/Buttons'
 
 const StyledForm = styled.form``
 
-const JoinForm = ({ form, onClick, onChange, onSelectDate }) => {
+const JoinForm = ({ form, onClick, onChange, onSelectDate, actionState }) => {
+  const [errors, formAction, isPending] = actionState
   return (
     <>
-      <StyledForm autoComplete="off">
+      <StyledForm action={formAction} autoComplete="off">
         <input type="hidden" name="gender" defaultValue={form?.gender ?? ''} />
         <input
           type="hidden"
@@ -182,11 +183,11 @@ const JoinForm = ({ form, onClick, onChange, onSelectDate }) => {
               )
             }
           >
-            {form?.optionalTerms ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}{' '}
+            {form?.optionalTerms ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
             광고성 정보 전송에 동의합니다.(선택)
           </div>
         </div>
-        <BigButtton type="submit" className="submit-btn">
+        <BigButtton type="submit" className="submit-btn" disabled={isPending}>
           가입하기
         </BigButtton>
       </StyledForm>
