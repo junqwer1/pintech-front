@@ -4,7 +4,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 type ContextType = {
   state?: { title?: string }
-  actions?: { setTitle?: (string) => void }
+  actions?: { setTitle?: (title: string) => void }
 }
 
 const CommonContext = createContext<ContextType>({})
